@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-import streamlit.components.v1 as components
 from mainEngine import search
 
 
@@ -98,24 +97,16 @@ if query:
 
             pdf_name = os.path.basename(r["pdf_file"])
 
-            pdf_url = f"http://localhost:8000/output/{pdf_name}"
+            with open(r["pdf_file"], "rb") as pdf_file:
 
-            st.markdown(
-            f'''
-            <a href="{pdf_url}" target="_blank"
-            style="
-                text-decoration:none;
-                background-color:#262730;
-                color:white;
-                padding:10px 18px;
-                border-radius:8px;
-                font-weight:600;
-            ">
-                📄 View Full PDF
-            </a>
-            ''',
-            unsafe_allow_html=True
-        )
+                st.download_button(
+                    label="📄 View Full PDF",
+                    data=pdf_file,
+                    file_name=pdf_name,
+                    mime="application/pdf"
+                )
+
+          
 
         # =====================================
         # RELEVANCE SCORE

@@ -45,10 +45,49 @@ def search(query, top_k=5):
 
 vectorizer = TfidfVectorizer(
     stop_words='english',
-    ngram_range=(1,2),
+    ngram_range=(1,3),
     lowercase=True
 )
 
-X = vectorizer.fit_transform(sections)
+search_corpus = []
+
+for i in range(len(sections)):
+
+    title = str(sum.iloc[i]["Name"])
+
+    one_line = str(
+        sum.iloc[i]["One-sentence significance"]
+    )
+
+    description = str(
+        sum.iloc[i]["Description"]
+    )
+
+    raw_text = str(
+        sections[i]
+    )
+
+    # =====================================
+    # PRIORITY WEIGHTING
+    # =====================================
+
+    combined_text = (
+
+        # Highest priority
+        (one_line + " ") * 5 +
+
+        # Second priority
+        (title + " ") * 4 +
+
+        # Third priority
+        (description + " ") * 3 +
+
+        # Lowest priority
+        raw_text
+    )
+
+    search_corpus.append(combined_text)
+
+X = vectorizer.fit_transform(search_corpus)
 
 

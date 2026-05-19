@@ -4,15 +4,38 @@ from mainEngine import search
 
 
 st.set_page_config(
-    page_title="Legal Search Engine",
+    page_title="Smart Search Indian Power System",
     page_icon="⚖️",
     layout="wide"
 )
 
-st.title("Legal Search Engine")
+hide_streamlit_style = """
+<style>
+
+#MainMenu {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+</style>
+"""
 
 st.markdown(
-    "Search legal sections, punishments and provisions instantly."
+    hide_streamlit_style,
+    unsafe_allow_html=True
+)
+
+st.title("Smart Search Indian Power System")
+
+st.markdown(
+    "Smart search for Indian power system enthusiasts."
 )
 
 
